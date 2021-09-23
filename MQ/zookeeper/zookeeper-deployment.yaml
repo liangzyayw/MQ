@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeeper
+  namespace: mq
+spec:
+  selector:
+    matchLabels:
+      app: zookeeper
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+    spec:
+      containers:
+      - name: zookeeper
+        image: zookeeper:3.5.9
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: zookeeper
+          containerPort: 2181
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /usr/local/zookeeper/data
+          name: zookeeper-data
+        - mountPath: /usr/local/zookeeper/logs
+          name: zookeeper-logs
+      volumes:
+      - name: zookeeper-data
+        persistentVolumeClaim:
+          claimName: zookeeper-data
+      - name: zookeeper-logs
+        persistentVolumeClaim:
+          claimName: zookeeper-logs

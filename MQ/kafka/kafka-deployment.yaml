@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka
+  namespace: mq
+spec:
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      containers:
+      - name: kafka
+        image: kafka:2.13-2.8.0
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: zookeeper_ip
+            value: zookeeper
+          - name: zookeeper_port
+            value: "2181"
+        ports:
+        - name: kafka
+          containerPort: 9092
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /usr/local/kafka/logs
+          name: kafka-logs
+      volumes:
+      - name: kafka-logs
+        persistentVolumeClaim:
+          claimName: kafka-logs
