@@ -6,7 +6,7 @@
 
 ```
 zookeeper-Dockerfile
-
+```
 ## 命名空间
 `执行mq-namespace.yaml文件`
 ```
@@ -15,6 +15,7 @@ kubectl create -f mq-namespace.yaml
 ## zookeeper
 `Dockerfile`
 >在zookeeper-Dockerfile目录执行下列操作
+
 ```
 ## 下载资源包
 wget https://wget.52liangzy.top/MQ/jdk.tar.gz
