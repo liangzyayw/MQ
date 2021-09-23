@@ -1,12 +1,6 @@
 ## MQ
 消息队列等服务；如: zookeeper、Kafka等
 
-## Dockerfile
-`zookeeper`
-
-```
-zookeeper-Dockerfile
-```
 ## 命名空间
 `执行mq-namespace.yaml文件`
 ```
